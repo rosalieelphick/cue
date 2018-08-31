@@ -16,6 +16,7 @@ class DeckPage extends Component {
             display: true,
             packDisplay: false,
             nocards: false,
+
             vocabulary: {
                 word1: {
                     question: "word1 name",
@@ -47,7 +48,6 @@ class DeckPage extends Component {
             },
 
             answerShown: false,
-
             selectedPack: [],
             answer: '',
             question: '',
@@ -64,7 +64,6 @@ class DeckPage extends Component {
             packDisplay: true,
             selectedPack: deckArray,
         },()=>{
-
             this.displayCard();
         })
     }
@@ -92,7 +91,6 @@ class DeckPage extends Component {
         this.setState({
             selectedPack: newState
         })
-        
     }
 
     showAnswer = (e) => {
@@ -116,7 +114,6 @@ class DeckPage extends Component {
     }
 
     review = () => {
-        console.log("review")
         this.setState({
             review: true
         })
@@ -138,7 +135,7 @@ class DeckPage extends Component {
 
                 {this.state.review ? 
                 
-                    <Review packSelected={this.props.packSelected}/>
+                    <Review packSelected={this.props.packSelected} homePage={this.props.homePage}/>
 
                 :
 
