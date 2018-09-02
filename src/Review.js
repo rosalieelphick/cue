@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 
+let duplicatePack = [];
 let reviewPack = [];
 let randomCard;
 
@@ -21,51 +22,55 @@ class Review extends Component {
     }
 
     componentDidMount() {
+
         newRef = firebase.database().ref(`/${this.props.packSelected}`)
+        let reviewItem;
+        reviewPack = [];
+        console.log(reviewPack)
         newRef.on("value", (snapshot) => {
             snapshot.forEach((i) => {
-                const reviewItem = {
+                reviewItem = {
                     key: i.key,
-                    value: i.val()
+                    value: i.val(),
+                    duplicateCheck: i.val()[0]
                 }
 
-                // reviewPack.push(i.val())
-                reviewPack.push(reviewItem)
-                console.log(reviewPack)
-                // console.log(i.key)
-            })
-        });
+                duplicatePack.push(reviewItem)
+                
+                function removeDuplicates(myArr, prop) {
+                    return myArr.filter((obj, pos, arr) => {
+                        return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+                    });
+                }
+
+                
+                reviewPack = removeDuplicates(duplicatePack, "duplicateCheck");
+
+            });
+
+        }); 
+        
     }
 
     displayDeck = () => {
+
+        this.render();
+
         this.setState({
             reviewPack: reviewPack,
             display: false,
             packDisplay: true,
             nocards: false
-            // selectedPack: deckArray,
         }, () => {
             this.displayCard();
         })
     }
 
-    reviewAgain = () => {
-        this.setState({
-            display: true,
-            packDisplay: true,
-            nocards: false,
-            // selectedPack: deckArray,
-        })
-    }
-
 
     displayCard = () => {
-        console.log('display Card called')
-        // let randomCard;
+
         if (this.state.reviewPack.length) {
             randomCard = this.state.reviewPack[Math.floor(Math.random() * this.state.reviewPack.length)];
-            console.log(randomCard.value)
-
 
             this.setState({
                 question: randomCard.value[1].question,
@@ -78,13 +83,13 @@ class Review extends Component {
             })
         }
 
-
         const index = this.state.reviewPack.indexOf(randomCard);
         const newState = Array.from(this.state.reviewPack);
         newState.splice(index, 1);
         this.setState({
             reviewPack: newState
-        })
+        });
+
     }
 
     showAnswer = (e) => {
@@ -98,7 +103,10 @@ class Review extends Component {
         this.setState({
             answerShown: false
         })
-        this.displayCard()
+
+        // this.displayDeck();
+        this.displayCard();
+
     }
 
     homePage = () => {
@@ -106,10 +114,7 @@ class Review extends Component {
     }
 
     delete = (e) => {
-        // e.preventDefault();
-        // console.log(randomCard.key)
         newRef.child(randomCard.key).remove();
-
     }
 
     render() {

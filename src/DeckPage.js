@@ -3,6 +3,7 @@ import firebase from './firebase';
 
 import Review from './Review'
 
+// emptyArray = [];
 const dbRef = firebase.database().ref()
 console.log(dbRef)
 let randomCard;
@@ -110,7 +111,25 @@ class DeckPage extends Component {
     addToDatabase = () => {
         const newRef = firebase.database().ref(this.props.packSelected)
         newRef.push(randomCard);
-        console.log(dbRef)
+        // newRef.on("value", (snapshot) => {
+        //     snapshot.forEach((i) => {
+        //         const reviewItem = {
+        //             key: i.key,
+        //             value: i.val()
+        //         }
+        //         emptyArray.push(reviewItem)
+        //     })
+            
+        // })
+
+        // this.setState({
+        //     reviewPacks: {
+        //         [this.props.packSelected]: newRef,
+        //     }
+            
+        // })
+
+        console.log(newRef)
     }
 
     review = () => {
