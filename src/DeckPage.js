@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
 
-import Review from './Review'
+import Review from './Review';
+import Icon from './Icon';
+import ProgressBar from './ProgressBar';
 
 // emptyArray = [];
 const dbRef = firebase.database().ref()
 console.log(dbRef)
 let randomCard;
+let deckLength;
+let childCount;
 
 class DeckPage extends Component {
 
@@ -67,6 +71,15 @@ class DeckPage extends Component {
         },()=>{
             this.displayCard();
         })
+
+        deckLength = deckArray.length
+    }
+
+    deckLength = () => {
+        const deckObject = this.state[this.props.packSelected]
+        const deckArray = Object.entries(deckObject);
+        deckLength = deckArray.length
+        return deckLength;
     }
 
     displayCard = () => {
@@ -111,25 +124,6 @@ class DeckPage extends Component {
     addToDatabase = () => {
         const newRef = firebase.database().ref(this.props.packSelected)
         newRef.push(randomCard);
-        // newRef.on("value", (snapshot) => {
-        //     snapshot.forEach((i) => {
-        //         const reviewItem = {
-        //             key: i.key,
-        //             value: i.val()
-        //         }
-        //         emptyArray.push(reviewItem)
-        //     })
-            
-        // })
-
-        // this.setState({
-        //     reviewPacks: {
-        //         [this.props.packSelected]: newRef,
-        //     }
-            
-        // })
-
-        console.log(newRef)
     }
 
     review = () => {
@@ -145,8 +139,34 @@ class DeckPage extends Component {
         })
     }
 
+    lengthOfPack = (object) => {
+        let length = 0;
+        for (let key in object) {
+            if (object.hasOwnProperty(key)) {
+                ++length;
+            }
+        }
+        return length;
+    }
+
+    getStats = () => {
+        const newRef = firebase.database().ref(this.props.packSelected)
+        let count;
+        newRef.once("value", (snapshot) => {
+            count = snapshot.numChildren();
+            this.displayStats(count);
+        })     
+    }
+
+    displayStats = (count) => {
+        childCount = count;
+        console.log(childCount)
+        return childCount
+    }
 
     render() {
+
+        console.log(deckLength)
 
         return (
 
@@ -162,11 +182,35 @@ class DeckPage extends Component {
                 
                         {this.state.nocards ? 
 
-                        <div>
-                            <h1>no more cards tho</h1>
-                            <button onClick={this.deckAgain}>go through deck again</button>
-                            <button onClick={this.review}>review wrong answers</button>
-                            <button onClick={this.props.homePage}>home page</button>
+                        <div className="deckComplete">
+                            <h2>Deck Complete</h2>
+
+                            <button className="deckAgain" onClick={this.deckAgain}>
+                                <div className="buttonIcon">
+                                    <Icon className="icon" icon={"redo"} />
+                                </div>
+                                <div className="buttonText">
+                                    Go through deck again
+                                </div> 
+                            </button>
+
+                            <button onClick={this.review}>
+                                <div className="buttonIcon">
+                                    <Icon className="icon" icon={"wrong"} /> 
+                                </div>
+                                <div className="buttonText">
+                                    Review wrong answers
+                                </div> 
+                            </button>
+
+                            <button onClick={this.props.homePage}>
+                                <div className="buttonIcon">
+                                    <Icon className="icon" icon={"allPacks"} />
+                                </div>
+                                <div className="buttonText">
+                                    Home page
+                                </div> 
+                            </button>
                         </div>
                         
 
@@ -175,25 +219,86 @@ class DeckPage extends Component {
 
                     :
                         <div>
-                            {this.state.display ? 
+                            {this.state.display ?
                             <div>
-                                <p>this is where my deck will go</p>
-                                <button onClick={this.displayDeck}>start deck</button>
-                                <button onClick={this.review}>review wrong answers</button>
+
+                                <div className="card cardInfo">
+                                    <div className="cardText">
+                                        <p>{this.props.packSelected}</p>
+                                        <p class="deckLength">{`${this.deckLength()} cards`}</p>
+                                    </div>
+
+                                    <button className="startDeck" onClick={this.displayDeck}>
+                                        start deck
+                                        <Icon className="icon" icon={"start"} />
+                                    </button>
+
+                                    <div className="buttonHolder">
+                                        <button className="review" onClick={this.review}>review wrong answers</button>
+                                    </div>
+                                </div>
+                                
                             </div>
                             :
                             <div>
                                 {this.state.answerShown ?
                                     <div>
-                                        <p>{this.state.answer}</p>
-                                        <button onClick={this.nextCard}>next card</button>
-                                        <button onClick={this.addToDatabase}>add to database</button>
+                                
+                                        <div className="card">
+
+                                            <div className="cardHeader">
+                                                <p>{this.props.packSelected}</p>
+                                                <p>{`${deckLength - this.state.selectedPack.length} / ${deckLength}`}</p>
+                                            </div>
+
+                                            <div className="cardText">
+                                                <p>{this.state.answer}</p>
+                                            </div>
+
+                                            <div className="buttonHolder">
+                                                <button className="leftAlign" onClick={this.addToDatabase}>
+                                                    <Icon className="icon" icon={"wrong"} />
+                                                    add to review
+                                                </button>
+                                                <button className="rightAlign" onClick={this.nextCard}>
+                                                    next card
+                                                    <Icon className="icon" icon={"check"} /> 
+                                                </button>
+                                            </div>
+
+    
+                                            
+                                        </div>
+                                        
+                                            <ProgressBar deckLength={deckLength} progress={deckLength - this.state.selectedPack.length}/>
+                                        
                                     </div>
                                     :
                                     <div>
-                                        <p>{this.state.question}</p>
-                                        <button onClick={this.showAnswer}>show answer</button>
+                                        <div className="card">
+                                            <div className="cardHeader">
+                                                <p>{this.props.packSelected}</p>
+                                                <p>{`${deckLength - this.state.selectedPack.length} / ${deckLength}`}</p>
+                                            </div>
+                                            <div className="cardText">
+                                                <p>{this.state.question}</p>
+                                            </div>
+
+                                            <div className="buttonHolder">
+                                                <button className="rightAlign" onClick={this.showAnswer}>
+                                                show answer
+                                                <Icon className="icon" icon={"rightArrow"} />
+                                                </button>
+                                            </div>   
+                                        </div>
+
+                                        <ProgressBar deckLength={deckLength} progress={deckLength - this.state.selectedPack.length}/>
+                                        
                                     </div>
+
+                                    
+
+                                    
                                 }
                             </div>       
                             }         

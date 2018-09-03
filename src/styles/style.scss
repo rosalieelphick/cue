@@ -1,0 +1,320 @@
+body {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    background-color: #eceff1;
+}
+
+// .App {
+//     border: solid red 2px;
+// }
+
+h1 {
+    // font-family: 'Grand Hotel', cursive;
+    font-size: 3rem;
+    margin: 0;
+}
+
+.card {
+    width: 80%;
+    height: 350px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+    // align-items:
+    position: relative;
+    border-radius: 9px;
+    background-color: white;
+    box-shadow: grey 0px 0px 10px 0px;
+}
+
+p {
+    font-size: 2rem;
+}
+
+.cardHeader {
+    width: 100%;
+    background-color: #2d3848;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    color: darkgrey;
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardHeader p {
+    font-size: 1rem;
+    padding: 0 15px;
+}
+
+.cardText {
+    display: flex;  
+    flex-direction: column;  
+    justify-content: space-around;
+    align-items: space-around;
+    flex-grow: 1;
+}
+
+.cardText p {
+    margin-top: 0;
+}
+
+.buttonHolder {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0
+}
+
+button {
+    background-color: #1b9ce2;
+    font-size: 0.7rem;
+    border: 0;
+    flex: 1 1 25px;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    color: white;
+    outline: none; 
+}
+
+svg {
+    padding: 0 15px;
+    fill: white;
+    stroke-width: 3;
+    stroke: white;
+}
+
+button.rightAlign {
+    justify-content: flex-end;
+}
+
+
+// PROGRESS BAR
+
+.barContainer {
+    margin: 0 auto;
+    margin-top: 50px;
+    height: 10px;
+    width: 80%;
+    background-color: gainsboro;
+    position: relative;
+    border-radius: 6px;
+}
+
+.progressBar {
+    position: absolute;
+    width: 20%;
+    left: 0;
+    height: 10px;
+    background-color: #2d3848;
+}
+
+// LANDING PAGE
+
+.packDisplay {
+    width: 80%;
+    margin: 20px auto;
+    height: 150px;
+    border-radius: 9px;
+    background-color: white;
+    box-shadow: silver 0px 0px 5px 0px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    color: black;
+    font-size: 1rem;
+    transition: all 0.3s;
+    &:hover {
+        box-shadow: silver 0px 0px 20px 0px;
+        background-color: #2d3848;
+        color: white;
+    }
+}
+
+.addPack svg {
+    width: 40;
+    height: 40;
+    margin-bottom: 25px;
+}
+
+.addPack {
+    display: flex;
+    background-color: lightslategrey;
+    flex-direction: column;
+    color: white;
+}
+
+.packFooter {
+    background-color: #2d3848;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    color: white;
+}
+
+.packFooter p {
+    font-size: 1rem;
+}
+
+// CARD INFO
+
+.cardInfo {
+    height: 300px;
+}
+
+.review {
+    background-color: #2d3848;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s;
+    &:hover {
+        box-shadow: grey 0px 0px 10px 0px;
+    }
+}
+
+.deckLength {
+    margin: 0 auto;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: grey
+}
+
+button.startDeck {
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 0;
+    background-color: #1b9ce2;
+    flex-grow: 0;
+    flex-basis: 50px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s;
+    & svg {
+        padding-right: 0;
+    }
+    &:hover {
+        box-shadow: grey 0px 0px 10px 0px;
+    }
+}
+
+
+.cardText {
+    margin: 30px 0;
+    flex-grow: 0;
+    & p {
+        margin: 0;
+    }
+}
+
+// FOOTER 
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+}
+
+// HEADER 
+
+header {
+    background-color: lightslategrey;
+    margin-bottom: 50px;
+}
+
+header button {
+    background-color: lightslategrey;
+    flex-grow: 0;
+    &:hover > svg {
+        fill: #2d3848;
+    }
+}
+
+header button svg {
+    transition: all 0.3s;
+}
+
+header .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapper {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    font-family: 'Cookie', cursive;
+    color: white;
+}
+
+// DECK COMPLETE
+
+.deckComplete button {
+    width: 300px;
+    margin: 20px auto;
+    border-radius: 8px;
+    background-color: lightslategrey;
+    position: relative;
+    box-shadow: silver 0px 0px 5px 0px;
+    transition: all 0.3s;
+    &:hover {
+      box-shadow: silver 0px 0px 20px 0px;
+      background-color: #2d3848; 
+      & > .buttonIcon {
+          border: solid 4px #2d3848;
+          & > svg {
+              fill: #2d3848;
+          }
+      }
+    }
+}
+
+.deckComplete .deckAgain {
+    margin-top: 50px;
+    background-color: #1b9ce2;
+    & > .buttonIcon {
+        border: solid 4px #1b9ce2;
+    }
+}
+
+.buttonIcon {
+    background-color: white;
+    position: absolute;
+    height: calc(100% - 8px);
+    width: 50px;
+    border: solid 4px lightslategrey;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.buttonIcon svg {
+    fill: lightslategrey;
+    transition: all 0.3s;
+}
+
+.buttonText {
+    padding-left: 65px;
+}
+
+// REVIEW
+
+.cardReview {
+    height: 230px;
+}
+
+.packReview {
+    font-size: 1.4rem;
+    color: grey;
+}

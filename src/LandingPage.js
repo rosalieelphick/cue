@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import DeckPage from './DeckPage'
+import DeckPage from './DeckPage';
+import Icon from './Icon';
 
 
 class LandingPage extends Component {
@@ -24,16 +25,40 @@ class LandingPage extends Component {
     }
 
     render() {
-
+        
+        
         return (
             <section>
+
+            <header>
+                <div className="wrapper">
+                <button onClick={this.homePage}>
+                    <Icon className="icon" icon={"allPacks"} />
+                </button>
+                <h1>cue</h1>
+                <button>
+                    <Icon className="icon" icon={"write"} />
+                </button>
+                </div>
+            </header>        
 
                 {this.state.display ? 
 
                 <div>
-                    <h2>select a pack to review</h2>
-                    <button onClick={this.handleClick} id="vocabulary">Vocabulary</button>
-                    <button onClick={this.handleClick} id="capitals">capitals</button>
+                    <h2>Select a pack to review</h2>
+
+                    <button className="packDisplay addPack" onClick={this.handleClick} id="vocabulary">
+                        <Icon className="icon" icon={"plus"} />
+                        Add custom pack
+                    </button>
+
+                    <button className="packDisplay" onClick={this.handleClick} id="vocabulary">
+                        Vocabulary
+                    </button>
+
+                    <button className="packDisplay" onClick={this.handleClick} id="capitals">
+                        Capitals
+                    </button>
                 </div>
                 
                 :

@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import Icon from './Icon';
+import ProgressBar from './ProgressBar';
 
 let duplicatePack = [];
 let reviewPack = [];
 let randomCard;
+let reviewPackLength;
+
 
 // const dbRef = firebase.database().ref();
 let newRef;
+let question;
+let answer;
+
+let newState;
+
 class Review extends Component {
 
     constructor() {
@@ -22,10 +31,17 @@ class Review extends Component {
     }
 
     componentDidMount() {
+        console.log(reviewPack)
+        console.log("mounted")
+        newRef = firebase.database().ref(`/${this.props.packSelected}`);
+        // newRef.on("child_removed", (snapshot) => {
+        //     snapshot.forEach((i) => {
+        //         deletedItem = i.val()
+        //     })
+        // })
 
-        newRef = firebase.database().ref(`/${this.props.packSelected}`)
         let reviewItem;
-        reviewPack = [];
+
         console.log(reviewPack)
         newRef.on("value", (snapshot) => {
             snapshot.forEach((i) => {
@@ -36,6 +52,10 @@ class Review extends Component {
                 }
 
                 duplicatePack.push(reviewItem)
+
+                // if (deletedItem === reviewItem.value) {
+                //     duplicatePack.splice(duplicatePack.arrayOf(reviewItem), 1)
+                // }
                 
                 function removeDuplicates(myArr, prop) {
                     return myArr.filter((obj, pos, arr) => {
@@ -43,9 +63,8 @@ class Review extends Component {
                     });
                 }
 
-                
                 reviewPack = removeDuplicates(duplicatePack, "duplicateCheck");
-
+                reviewPackLength = reviewPack.length
             });
 
         }); 
@@ -54,7 +73,9 @@ class Review extends Component {
 
     displayDeck = () => {
 
-        this.render();
+        this.componentDidMount();
+
+        console.log(reviewPack)
 
         this.setState({
             reviewPack: reviewPack,
@@ -69,8 +90,13 @@ class Review extends Component {
 
     displayCard = () => {
 
+        console.log(reviewPack.length)
+        console.log(this.state)
+
         if (this.state.reviewPack.length) {
+
             randomCard = this.state.reviewPack[Math.floor(Math.random() * this.state.reviewPack.length)];
+            console.log(randomCard)
 
             this.setState({
                 question: randomCard.value[1].question,
@@ -84,7 +110,7 @@ class Review extends Component {
         }
 
         const index = this.state.reviewPack.indexOf(randomCard);
-        const newState = Array.from(this.state.reviewPack);
+        newState = Array.from(this.state.reviewPack);
         newState.splice(index, 1);
         this.setState({
             reviewPack: newState
@@ -102,20 +128,49 @@ class Review extends Component {
     nextCard = () => {
         this.setState({
             answerShown: false
-        })
+        });
 
-        // this.displayDeck();
         this.displayCard();
-
     }
 
     homePage = () => {
         reviewPack.length = 0;
     }
 
-    delete = (e) => {
-        newRef.child(randomCard.key).remove();
+    delete = () => {
+
+        const deleteRef = newRef.child(randomCard.key);
+        // let reviewItem;
+
+        deleteRef.set({}).then(() => {
+            const index = reviewPack.indexOf(randomCard)
+            reviewPack.splice(index, 1)
+        });
     }
+
+    // getStats = () => {
+    //     const newRef = firebase.database().ref(this.props.packSelected)
+    //     let count;
+    //     newRef.once("value", (snapshot) => {
+    //         count = snapshot.numChildren();
+    //         this.displayStats(count);
+    //     })
+    // }
+
+    // displayStats = (count) => {
+    //     childCount = count;
+    //     console.log(childCount)
+    //     return childCount
+    // }
+
+    // deckLength = () => {
+    //     // const deckObject = this.state[this.props.packSelected]
+    //     // const deckArray = Object.entries(deckObject);
+    //     // deckLength = deckArray.length
+    //     // return deckLength;
+
+    //     reviewPack.length
+    // }
 
     render() {
 
@@ -126,11 +181,27 @@ class Review extends Component {
 
                 {this.state.nocards ?
 
-                    <div>
-                        <h1>no more cards tho</h1>
-                        {/* <button onClick={this.deckAgain}>go through deck again</button> */}
-                        <button onClick={this.displayDeck}>review again</button>
-                        <button onClick={(e) => {this.props.homePage(); this.homePage()}}>home page</button>
+                    <div className="deckComplete">
+                        <h2>Deck Complete</h2>
+
+                        <button className="deckAgain" onClick={this.displayDeck}>
+                            <div className="buttonIcon">
+                                <Icon className="icon" icon={"redo"} />
+                            </div>
+                            <div className="buttonText">
+                                Review deck again
+                                </div>
+                        </button>
+
+                        <button onClick={(e) => { this.props.homePage(); this.homePage() }}>
+                            <div className="buttonIcon">
+                                <Icon className="icon" icon={"allPacks"} />
+                            </div>
+                            <div className="buttonText">
+                                Home page
+                            </div>
+                        </button>
+
                     </div>
 
                     :
@@ -139,29 +210,84 @@ class Review extends Component {
                         {this.state.display ?
                             <div>
 
-                                <div>
-                                    <h1>{this.props.packSelected}</h1>
-                                    <button onClick={this.displayDeck}>start review</button>
-                                    <button onClick={this.props.homePage}>home page</button>
+                                <div className="card cardInfo cardReview">
+                                    <div className="cardText">
+                                    <p>Pack Review</p>
+                                    <p className="packReview">{`${this.props.packSelected}`}</p>
+                                    </div>
+
+                                    <button className="startDeck" onClick={this.displayDeck}>
+                                        start review
+                                        <Icon className="icon" icon={"start"}/>
+                                    </button>
                                 </div>
 
                             </div>
                             :
                             <div>
                                 {this.state.answerShown ?
+
                                     <div>
-                                        <p>{this.state.answer}</p>
+                                        {/* <div className="card">
+                                            <p>{this.state.answer}</p>
+                                        </div>
+                                        
+                                        <div className="buttonHolder">
+                                            <button onClick={this.nextCard}>next card</button>
+                                            <button onClick={this.delete}>delete from review</button>
+                                        </div>
+                                    </div> */}
 
-                                        <button onClick={this.nextCard}>next card</button>
+                                    <div className="card">
 
-                                        <button onClick={this.delete}>delete from review</button>
+                                        <div className="cardHeader">
+                                            <p>{`${this.props.packSelected}: review`}</p>
+                                            <p>{`${(reviewPack.length) - (this.state.reviewPack.length)} / ${reviewPack.length}`}</p>
+                                        </div>
+
+                                        <div className="cardText">
+                                            <p>{this.state.answer}</p>
+                                        </div>
+
+                                        <div className="buttonHolder">
+                                            <button className="leftAlign" onClick={this.delete}>
+                                                <Icon className="icon" icon={"wrong"} />
+                                                delete from review
+                                                </button>
+                                            <button className="rightAlign" onClick={this.nextCard}>
+                                                next card
+                                                <Icon className="icon" icon={"check"} />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                        <ProgressBar deckLength={reviewPack.length} progress={(reviewPack.length) - (this.state.reviewPack.length)} />
 
                                     </div>
+
                                     :
                                     <div>
-                                        <p>{this.state.question}</p>
-                                        <button onClick={this.showAnswer}>show answer</button>
-                                        
+
+
+                                        <div className="card">
+                                            <div className="cardHeader">
+                                                <p>{`${this.props.packSelected}: review`}</p>
+                                                <p>{`${(reviewPack.length) - (this.state.reviewPack.length)} / ${reviewPack.length}`}</p>
+                                            </div>
+                                            <div className="cardText">
+                                                <p>{this.state.question}</p>
+                                            </div>
+
+                                            <div className="buttonHolder">
+                                                <button className="rightAlign" onClick={this.showAnswer}>
+                                                    show answer
+                                                <Icon className="icon" icon={"rightArrow"} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    
+                                        <ProgressBar deckLength={reviewPack.length} progress={(reviewPack.length) - (this.state.reviewPack.length)} />
+
                                     </div>
                                 }
                             </div>
