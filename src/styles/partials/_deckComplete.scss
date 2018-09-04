@@ -1,0 +1,51 @@
+// DECK COMPLETE
+
+.deckComplete button {
+    width: 300px;
+    margin: 20px auto;
+    border-radius: 8px;
+    background-color: lightslategrey;
+    position: relative;
+    box-shadow: silver 0px 0px 5px 0px;
+    transition: all 0.3s;
+    &:hover {
+      box-shadow: silver 0px 0px 20px 0px;
+      background-color: $darkBlue; 
+      & > .buttonIcon {
+          border: solid 4px $darkBlue;
+          & > svg {
+              fill: $darkBlue;
+          }
+      }
+    }
+}
+
+.deckComplete .deckAgain {
+    margin-top: 50px;
+    background-color: $brightBlue;
+    & > .buttonIcon {
+        border: solid 4px $brightBlue;
+    }
+}
+
+.buttonIcon {
+    background-color: white;
+    position: absolute;
+    height: 100%;
+    width: 50px;
+    border: solid 4px lightslategrey;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.buttonIcon svg {
+    fill: lightslategrey;
+    transition: all 0.3s;
+}
+
+.buttonText {
+    padding-left: 65px;
+}

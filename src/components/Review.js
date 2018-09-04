@@ -6,14 +6,7 @@ import ProgressBar from './ProgressBar';
 let duplicatePack = [];
 let reviewPack = [];
 let randomCard;
-let reviewPackLength;
-
-
-// const dbRef = firebase.database().ref();
 let newRef;
-let question;
-let answer;
-
 let newState;
 
 class Review extends Component {
@@ -64,7 +57,6 @@ class Review extends Component {
                 }
 
                 reviewPack = removeDuplicates(duplicatePack, "duplicateCheck");
-                reviewPackLength = reviewPack.length
             });
 
         }); 

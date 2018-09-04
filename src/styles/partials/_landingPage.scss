@@ -1,0 +1,40 @@
+// LANDING PAGE
+
+.packDisplay {
+    width: 100%;
+    margin: 20px auto;
+    height: 150px;
+    border-radius: 9px;
+    background-color: white;
+    box-shadow: silver 0px 0px 5px 0px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    color: black;
+    font-size: 1rem;
+    transition: all 0.3s;
+    &:hover {
+        box-shadow: silver 0px 0px 20px 0px;
+        background-color: $darkBlue;
+        color: white;
+    }
+}
+
+.addPack svg {
+    margin-bottom: 25px;
+}
+
+.addPack {
+    display: flex;
+    background-color: lightslategrey;
+    flex-direction: column;
+    color: white;
+}
+
+.packFooter {
+    background-color: $darkBlue;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    color: white;
+}

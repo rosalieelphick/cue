@@ -1,0 +1,18 @@
+// PROGRESS BAR
+
+.barContainer {
+    margin: 0 auto;
+    margin-top: 50px;
+    height: 10px;
+    background-color: gainsboro;
+    position: relative;
+    border-radius: 6px;
+}
+
+.progressBar {
+    position: absolute;
+    width: 20%;
+    left: 0;
+    height: 10px;
+    background-color: $darkBlue;
+}

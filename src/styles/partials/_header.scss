@@ -1,0 +1,29 @@
+// HEADER 
+
+header {
+    background-color: lightslategrey;
+    margin-bottom: 50px;
+}
+
+header button {
+    background-color: lightslategrey;
+    flex-grow: 0;
+    &:hover > svg {
+        fill: #2d3848;
+    }
+}
+
+header button svg {
+    transition: all 0.3s;
+}
+
+header .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Cookie', cursive;
+    color: white;
+}

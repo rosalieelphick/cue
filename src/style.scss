@@ -1,0 +1,322 @@
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:700;}dfn{font-style:italic;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace, serif;font-size:1em;}pre{white-space:pre-wrap;word-wrap:break-word;}q{quotes:\201C \201D \2018 \2019;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-.5em;}sub{bottom:-.25em;}img{border:0;}svg:not(:root){overflow:hidden;}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,html input[type=button],/* 1 */input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}button[disabled],input[disabled]{cursor:default;}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0;}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}body,figure{margin:0;}legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
+
+.clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+$darkBlue: #2d3848;
+$brightBlue: #1b9ce2;
+
+// @import "partials/setup";
+// @import "partials/card";
+// @import "partials/progressBar";
+// @import "partials/landingPage";
+// @import "partials/cardInfo";
+// @import "partials/header";
+// @import "partials/deckComplete";
+
+body {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    background-color: #eceff1;
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+p {
+    font-size: 2rem;
+}
+
+svg {
+    margin: 0 15px;
+    fill: white;
+    stroke-width: 3;
+    stroke: white;
+    transition: all 0.3s;
+}
+
+.wrapper {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+// FOOTER 
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+}
+
+// REVIEW
+
+.cardReview {
+    height: 230px;
+}
+
+.packReview {
+    font-size: 1.4rem;
+    color: grey;
+}
+
+
+// CARD 
+
+.card {
+    height: 350px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 9px;
+    background-color: white;
+    box-shadow: grey 0px 0px 10px 0px;
+}
+
+.cardHeader {
+    width: 100%;
+    background-color: $darkBlue;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    color: darkgrey;
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    & p {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+}
+
+.cardText {
+    display: flex;  
+    flex-direction: column;  
+    justify-content: space-around;
+    align-items: space-around;
+    flex-grow: 1;
+
+}
+
+.buttonHolder {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0
+}
+
+button {
+    background-color: $brightBlue;
+    font-size: 0.7rem;
+    border: 0;
+    flex: 1 1 25px;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    color: white;
+    outline: none;
+    transition: all 0.3s;
+}
+
+button.rightAlign {
+    justify-content: flex-end;
+}
+
+// PROGRESS BAR
+
+.barContainer {
+    margin: 0 auto;
+    margin-top: 50px;
+    height: 10px;
+    background-color: gainsboro;
+    position: relative;
+    border-radius: 6px;
+}
+
+.progressBar {
+    position: absolute;
+    width: 20%;
+    left: 0;
+    height: 10px;
+    background-color: $darkBlue;
+}
+
+// LANDING PAGE
+
+.packDisplay {
+    width: 100%;
+    margin: 20px auto;
+    height: 150px;
+    border-radius: 9px;
+    background-color: white;
+    box-shadow: silver 0px 0px 5px 0px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    color: black;
+    font-size: 1rem;
+    transition: all 0.3s;
+    &:hover {
+        box-shadow: silver 0px 0px 20px 0px;
+        background-color: $darkBlue;
+        color: white;
+    }
+}
+
+.addPack svg {
+    margin-bottom: 25px;
+}
+
+.addPack {
+    display: flex;
+    background-color: lightslategrey;
+    flex-direction: column;
+    color: white;
+}
+
+.packFooter {
+    background-color: $darkBlue;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    color: white;
+}
+
+// CARD INFO
+
+.cardInfo {
+    height: 300px;
+}
+
+.review {
+    background-color: $darkBlue;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s;
+    &:hover {
+        color: white;
+        box-shadow: grey 0px 0px 10px 0px;
+    }
+}
+
+.deckLength {
+    margin: 0 auto;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: grey
+}
+
+button.startDeck {
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 0;
+    background-color: $brightBlue;
+    flex-grow: 0;
+    flex-basis: 50px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s;
+    & svg {
+        margin-right: 0;
+    }
+    &:hover {
+        box-shadow: grey 0px 0px 10px 0px;
+    }
+}
+
+.cardText {
+    margin: 30px 0;
+    flex-grow: 0;
+    & p {
+        margin: 0;
+    }
+}
+
+// HEADER 
+
+header {
+    background-color: lightslategrey;
+    margin-bottom: 50px;
+}
+
+header button {
+    background-color: lightslategrey;
+    flex-grow: 0;
+    &:hover > svg {
+        fill: #2d3848;
+    }
+}
+
+header button svg {
+    transition: all 0.3s;
+}
+
+header .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Cookie', cursive;
+    color: white;
+}
+
+// DECK COMPLETE
+
+.deckComplete button {
+    width: 300px;
+    margin: 20px auto;
+    border-radius: 8px;
+    background-color: lightslategrey;
+    position: relative;
+    box-shadow: silver 0px 0px 5px 0px;
+    transition: all 0.3s;
+    &:hover {
+      box-shadow: silver 0px 0px 20px 0px;
+      background-color: $darkBlue; 
+      & > .buttonIcon {
+          border: solid 4px $darkBlue;
+          & > svg {
+              fill: $darkBlue;
+          }
+      }
+    }
+}
+
+.deckComplete .deckAgain {
+    margin-top: 50px;
+    background-color: $brightBlue;
+    & > .buttonIcon {
+        border: solid 4px $brightBlue;
+    }
+}
+
+.buttonIcon {
+    background-color: white;
+    position: absolute;
+    height: 100%;
+    width: 50px;
+    border: solid 4px lightslategrey;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.buttonIcon svg {
+    fill: lightslategrey;
+    transition: all 0.3s;
+}
+
+.buttonText {
+    padding-left: 65px;
+}
