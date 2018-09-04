@@ -5,9 +5,6 @@ import Review from './Review';
 import Icon from './Icon';
 import ProgressBar from './ProgressBar';
 
-// emptyArray = [];
-const dbRef = firebase.database().ref()
-console.log(dbRef)
 let randomCard;
 let deckLength;
 let childCount;
@@ -24,31 +21,87 @@ class DeckPage extends Component {
 
             vocabulary: {
                 word1: {
-                    question: "word1 name",
-                    answer: "word1 definition"
+                    question: "Abnegation",
+                    answer: "the denial and rejection of a doctrine or belief"
                 },
                 word2: {
-                    question: "word2 name",
-                    answer: "word2 definition"
+                    question: "Beguile",
+                    answer: "influence by slyness"
                 },
                 word3: {
-                    question: "word3 name",
-                    answer: "word3 definition"
+                    question: "Circumlocution",
+                    answer: "an indirect way of expressing something"
                 },
                 word4: {
-                    question: "word4 name",
-                    answer: "word4 definition"
+                    question: "Didactic",
+                    answer: "instructive, especially excessively"
                 },
                 word5: {
-                    question: "word5 name",
-                    answer: "word5 definition"
+                    question: "Equanimity",
+                    answer: "steadiness of mind under stress"
+                },
+                word6: {
+                    question: "Intransigent",
+                    answer: "impervious to pleas, persuasion, requests, or reason"
+                },
+                word7: {
+                    question: "Penchant",
+                    answer: "a strong liking"
+                },
+                word8: {
+                    question: "Serendipity",
+                    answer: "good luck in making unexpected and fortunate discoveries"
+                },
+                word9: {
+                    question: "Umbrage",
+                    answer: "a feeling of anger caused by being offended"
+                },
+                word10: {
+                    question: "Vociferous",
+                    answer: "conspicuously and offensively loud"
                 }
             },
 
             capitals: {
                 capital1: {
-                    question: "capital 1 name",
-                    answer: "capital1 definition"
+                    question: "Afghanistan",
+                    answer: "Kabul"
+                },
+                capital2: {
+                    question: "Austria",
+                    answer: "Vienna"
+                },
+                capital3: {
+                    question: "Chile",
+                    answer: "Santiago"
+                },
+                capital4: {
+                    question: "Czech Republic",
+                    answer: "Prague"
+                },
+                capital5: {
+                    question: "Finland",
+                    answer: "Helsinki"
+                },
+                capital6: {
+                    question: "Israel",
+                    answer: "Tel Aviv"
+                },
+                capital7: {
+                    question: "Latvia",
+                    answer: "Riga"
+                },
+                capital8: {
+                    question: "Pakistan",
+                    answer: "Islamabad"
+                },
+                capital9: {
+                    question: "Syria",
+                    answer: "Damascus"
+                },
+                capital10: {
+                    question: "Yemen",
+                    answer: "Sanaa"
                 }
             },
 
@@ -84,11 +137,8 @@ class DeckPage extends Component {
 
     displayCard = () => {
 
-        console.log("hey")
-        // let randomCard;
         if (this.state.selectedPack.length) {
             randomCard = this.state.selectedPack[Math.floor(Math.random() * this.state.selectedPack.length)];
-            console.log(randomCard)
             this.setState({
                 question: randomCard[1].question,
                 answer: randomCard[1].answer
@@ -160,14 +210,10 @@ class DeckPage extends Component {
 
     displayStats = (count) => {
         childCount = count;
-        console.log(childCount)
         return childCount
     }
 
     render() {
-
-        console.log(deckLength)
-
         return (
 
             <div>
@@ -212,10 +258,6 @@ class DeckPage extends Component {
                                 </div>
                                 </button>
                             </div>
-
-
-                            // <Review packSelected={this.packSelected}/>
-                            // <h1>{this.state.selectedPack}</h1>
 
                             :
                             <div>

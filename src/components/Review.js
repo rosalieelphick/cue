@@ -24,18 +24,8 @@ class Review extends Component {
     }
 
     componentDidMount() {
-        console.log(reviewPack)
-        console.log("mounted")
         newRef = firebase.database().ref(`/${this.props.packSelected}`);
-        // newRef.on("child_removed", (snapshot) => {
-        //     snapshot.forEach((i) => {
-        //         deletedItem = i.val()
-        //     })
-        // })
-
         let reviewItem;
-
-        console.log(reviewPack)
         newRef.on("value", (snapshot) => {
             snapshot.forEach((i) => {
                 reviewItem = {
@@ -45,11 +35,6 @@ class Review extends Component {
                 }
 
                 duplicatePack.push(reviewItem)
-
-                // if (deletedItem === reviewItem.value) {
-                //     duplicatePack.splice(duplicatePack.arrayOf(reviewItem), 1)
-                // }
-                
                 function removeDuplicates(myArr, prop) {
                     return myArr.filter((obj, pos, arr) => {
                         return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
@@ -57,6 +42,7 @@ class Review extends Component {
                 }
 
                 reviewPack = removeDuplicates(duplicatePack, "duplicateCheck");
+                console.log(reviewPack)
             });
 
         }); 
@@ -64,11 +50,8 @@ class Review extends Component {
     }
 
     displayDeck = () => {
-
+        
         this.componentDidMount();
-
-        console.log(reviewPack)
-
         this.setState({
             reviewPack: reviewPack,
             display: false,
@@ -82,13 +65,9 @@ class Review extends Component {
 
     displayCard = () => {
 
-        console.log(reviewPack.length)
-        console.log(this.state)
-
         if (this.state.reviewPack.length) {
 
             randomCard = this.state.reviewPack[Math.floor(Math.random() * this.state.reviewPack.length)];
-            console.log(randomCard)
 
             this.setState({
                 question: randomCard.value[1].question,
@@ -132,37 +111,11 @@ class Review extends Component {
     delete = () => {
 
         const deleteRef = newRef.child(randomCard.key);
-        // let reviewItem;
-
         deleteRef.set({}).then(() => {
             const index = reviewPack.indexOf(randomCard)
             reviewPack.splice(index, 1)
         });
     }
-
-    // getStats = () => {
-    //     const newRef = firebase.database().ref(this.props.packSelected)
-    //     let count;
-    //     newRef.once("value", (snapshot) => {
-    //         count = snapshot.numChildren();
-    //         this.displayStats(count);
-    //     })
-    // }
-
-    // displayStats = (count) => {
-    //     childCount = count;
-    //     console.log(childCount)
-    //     return childCount
-    // }
-
-    // deckLength = () => {
-    //     // const deckObject = this.state[this.props.packSelected]
-    //     // const deckArray = Object.entries(deckObject);
-    //     // deckLength = deckArray.length
-    //     // return deckLength;
-
-    //     reviewPack.length
-    // }
 
     render() {
 
@@ -220,15 +173,6 @@ class Review extends Component {
                                 {this.state.answerShown ?
 
                                     <div className="wrapper">
-                                        {/* <div className="card">
-                                            <p>{this.state.answer}</p>
-                                        </div>
-                                        
-                                        <div className="buttonHolder">
-                                            <button onClick={this.nextCard}>next card</button>
-                                            <button onClick={this.delete}>delete from review</button>
-                                        </div>
-                                    </div> */}
 
                                     <div className="card">
 
