@@ -8,7 +8,6 @@ h1 {
   margin: 0; }
 
 .card {
-  width: 80%;
   height: 350px;
   margin: 30px auto;
   display: flex;
@@ -76,7 +75,6 @@ button.rightAlign {
   margin: 0 auto;
   margin-top: 50px;
   height: 10px;
-  width: 80%;
   background-color: gainsboro;
   position: relative;
   border-radius: 6px; }
@@ -89,7 +87,7 @@ button.rightAlign {
   background-color: #2d3848; }
 
 .packDisplay {
-  width: 80%;
+  width: 100%;
   margin: 20px auto;
   height: 150px;
   border-radius: 9px;
@@ -194,6 +192,7 @@ header .wrapper {
 
 .wrapper {
   width: 80%;
+  max-width: 600px;
   margin: 0 auto; }
 
 h1 {

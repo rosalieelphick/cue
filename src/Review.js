@@ -208,7 +208,7 @@ class Review extends Component {
 
                     <div>
                         {this.state.display ?
-                            <div>
+                            <div className="wrapper">
 
                                 <div className="card cardInfo cardReview">
                                     <div className="cardText">
@@ -227,7 +227,7 @@ class Review extends Component {
                             <div>
                                 {this.state.answerShown ?
 
-                                    <div>
+                                    <div className="wrapper">
                                         {/* <div className="card">
                                             <p>{this.state.answer}</p>
                                         </div>
@@ -266,7 +266,7 @@ class Review extends Component {
                                     </div>
 
                                     :
-                                    <div>
+                                    <div className="wrapper">
 
 
                                         <div className="card">

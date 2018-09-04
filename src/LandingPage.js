@@ -26,7 +26,6 @@ class LandingPage extends Component {
 
     render() {
         
-        
         return (
             <section>
 
@@ -44,7 +43,8 @@ class LandingPage extends Component {
 
                 {this.state.display ? 
 
-                <div>
+                <div className="wrapper">
+
                     <h2>Select a pack to review</h2>
 
                     <button className="packDisplay addPack" onClick={this.handleClick} id="vocabulary">

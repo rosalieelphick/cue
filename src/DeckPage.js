@@ -68,7 +68,7 @@ class DeckPage extends Component {
             display: false,
             packDisplay: true,
             selectedPack: deckArray,
-        },()=>{
+        }, () => {
             this.displayCard();
         })
 
@@ -90,15 +90,15 @@ class DeckPage extends Component {
             randomCard = this.state.selectedPack[Math.floor(Math.random() * this.state.selectedPack.length)];
             console.log(randomCard)
             this.setState({
-                question : randomCard[1].question,
-                answer : randomCard[1].answer
+                question: randomCard[1].question,
+                answer: randomCard[1].answer
             })
         } else {
             this.setState({
                 nocards: true
             })
         }
-       
+
         const index = this.state.selectedPack.indexOf(randomCard);
         const newState = Array.from(this.state.selectedPack);
         newState.splice(index, 1);
@@ -155,7 +155,7 @@ class DeckPage extends Component {
         newRef.once("value", (snapshot) => {
             count = snapshot.numChildren();
             this.displayStats(count);
-        })     
+        })
     }
 
     displayStats = (count) => {
@@ -172,146 +172,146 @@ class DeckPage extends Component {
 
             <div>
 
-                {this.state.review ? 
-                
-                    <Review packSelected={this.props.packSelected} homePage={this.props.homePage}/>
+                {this.state.review ?
 
-                :
-
-                    <div>
-                
-                        {this.state.nocards ? 
-
-                        <div className="deckComplete">
-                            <h2>Deck Complete</h2>
-
-                            <button className="deckAgain" onClick={this.deckAgain}>
-                                <div className="buttonIcon">
-                                    <Icon className="icon" icon={"redo"} />
-                                </div>
-                                <div className="buttonText">
-                                    Go through deck again
-                                </div> 
-                            </button>
-
-                            <button onClick={this.review}>
-                                <div className="buttonIcon">
-                                    <Icon className="icon" icon={"wrong"} /> 
-                                </div>
-                                <div className="buttonText">
-                                    Review wrong answers
-                                </div> 
-                            </button>
-
-                            <button onClick={this.props.homePage}>
-                                <div className="buttonIcon">
-                                    <Icon className="icon" icon={"allPacks"} />
-                                </div>
-                                <div className="buttonText">
-                                    Home page
-                                </div> 
-                            </button>
-                        </div>
-                        
-
-                        // <Review packSelected={this.packSelected}/>
-                        // <h1>{this.state.selectedPack}</h1>
+                    <Review packSelected={this.props.packSelected} homePage={this.props.homePage} />
 
                     :
-                        <div>
-                            {this.state.display ?
-                            <div>
 
-                                <div className="card cardInfo">
-                                    <div className="cardText">
-                                        <p>{this.props.packSelected}</p>
-                                        <p class="deckLength">{`${this.deckLength()} cards`}</p>
+                    <div>
+
+                        {this.state.nocards ?
+
+                            <div className="deckComplete">
+                                <h2>Deck Complete</h2>
+
+                                <button className="deckAgain" onClick={this.deckAgain}>
+                                    <div className="buttonIcon">
+                                        <Icon className="icon" icon={"redo"} />
                                     </div>
-
-                                    <button className="startDeck" onClick={this.displayDeck}>
-                                        start deck
-                                        <Icon className="icon" icon={"start"} />
-                                    </button>
-
-                                    <div className="buttonHolder">
-                                        <button className="review" onClick={this.review}>review wrong answers</button>
-                                    </div>
+                                    <div className="buttonText">
+                                        Go through deck again
                                 </div>
-                                
+                                </button>
+
+                                <button onClick={this.review}>
+                                    <div className="buttonIcon">
+                                        <Icon className="icon" icon={"wrong"} />
+                                    </div>
+                                    <div className="buttonText">
+                                        Review wrong answers
+                                </div>
+                                </button>
+
+                                <button onClick={this.props.homePage}>
+                                    <div className="buttonIcon">
+                                        <Icon className="icon" icon={"allPacks"} />
+                                    </div>
+                                    <div className="buttonText">
+                                        Home page
+                                </div>
+                                </button>
                             </div>
+
+
+                            // <Review packSelected={this.packSelected}/>
+                            // <h1>{this.state.selectedPack}</h1>
+
                             :
                             <div>
-                                {this.state.answerShown ?
-                                    <div>
-                                
-                                        <div className="card">
+                                {this.state.display ?
+                                    <div className="wrapper">
 
-                                            <div className="cardHeader">
-                                                <p>{this.props.packSelected}</p>
-                                                <p>{`${deckLength - this.state.selectedPack.length} / ${deckLength}`}</p>
-                                            </div>
-
+                                        <div className="card cardInfo">
                                             <div className="cardText">
-                                                <p>{this.state.answer}</p>
+                                                <p>{this.props.packSelected}</p>
+                                                <p class="deckLength">{`${this.deckLength()} cards`}</p>
                                             </div>
+
+                                            <button className="startDeck" onClick={this.displayDeck}>
+                                                start deck
+                                        <Icon className="icon" icon={"start"} />
+                                            </button>
 
                                             <div className="buttonHolder">
-                                                <button className="leftAlign" onClick={this.addToDatabase}>
-                                                    <Icon className="icon" icon={"wrong"} />
-                                                    add to review
-                                                </button>
-                                                <button className="rightAlign" onClick={this.nextCard}>
-                                                    next card
-                                                    <Icon className="icon" icon={"check"} /> 
-                                                </button>
+                                                <button className="review" onClick={this.review}>review wrong answers</button>
                                             </div>
-
-    
-                                            
                                         </div>
-                                        
-                                            <ProgressBar deckLength={deckLength} progress={deckLength - this.state.selectedPack.length}/>
-                                        
+
                                     </div>
                                     :
                                     <div>
-                                        <div className="card">
-                                            <div className="cardHeader">
-                                                <p>{this.props.packSelected}</p>
-                                                <p>{`${deckLength - this.state.selectedPack.length} / ${deckLength}`}</p>
-                                            </div>
-                                            <div className="cardText">
-                                                <p>{this.state.question}</p>
-                                            </div>
+                                        {this.state.answerShown ?
+                                            <div className="wrapper">
 
-                                            <div className="buttonHolder">
-                                                <button className="rightAlign" onClick={this.showAnswer}>
-                                                show answer
-                                                <Icon className="icon" icon={"rightArrow"} />
+                                                <div className="card">
+
+                                                    <div className="cardHeader">
+                                                        <p>{this.props.packSelected}</p>
+                                                        <p>{`${deckLength - this.state.selectedPack.length} / ${deckLength}`}</p>
+                                                    </div>
+
+                                                    <div className="cardText">
+                                                        <p>{this.state.answer}</p>
+                                                    </div>
+
+                                                    <div className="buttonHolder">
+                                                        <button className="leftAlign" onClick={this.addToDatabase}>
+                                                            <Icon className="icon" icon={"wrong"} />
+                                                            add to review
                                                 </button>
-                                            </div>   
-                                        </div>
+                                                        <button className="rightAlign" onClick={this.nextCard}>
+                                                            next card
+                                                    <Icon className="icon" icon={"check"} />
+                                                        </button>
+                                                    </div>
 
-                                        <ProgressBar deckLength={deckLength} progress={deckLength - this.state.selectedPack.length}/>
-                                        
+
+
+                                                </div>
+
+                                                <ProgressBar deckLength={deckLength} progress={deckLength - this.state.selectedPack.length} />
+
+                                            </div>
+                                            :
+                                            <div className="wrapper">
+                                                <div className="card">
+                                                    <div className="cardHeader">
+                                                        <p>{this.props.packSelected}</p>
+                                                        <p>{`${deckLength - this.state.selectedPack.length} / ${deckLength}`}</p>
+                                                    </div>
+                                                    <div className="cardText">
+                                                        <p>{this.state.question}</p>
+                                                    </div>
+
+                                                    <div className="buttonHolder">
+                                                        <button className="rightAlign" onClick={this.showAnswer}>
+                                                            show answer
+                                                <Icon className="icon" icon={"rightArrow"} />
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <ProgressBar deckLength={deckLength} progress={deckLength - this.state.selectedPack.length} />
+
+                                            </div>
+
+
+
+
+                                        }
                                     </div>
-
-                                    
-
-                                    
                                 }
-                            </div>       
-                            }         
-                        </div>
-                    }
+                            </div>
+                        }
 
                     </div>
-                    
+
                 }
 
             </div>
 
-        )      
+        )
     }
 }
 
