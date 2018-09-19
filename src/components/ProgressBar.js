@@ -22,7 +22,7 @@ class ProgressBar extends Component {
     render() {
         return(
 
-            <div className="barContainer">
+            <div className="barContainer wrapper">
                 <div>{this.getStyles()}</div>
             </div>
             

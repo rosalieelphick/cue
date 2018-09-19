@@ -20,14 +20,22 @@ class Review extends Component {
             answer: '',
             question: '',
             display: true,
+            reviewPack: []
         }
     }
 
     componentDidMount() {
+        this.getDataAgain();
+    }
+
+    getDataAgain = () => {
+        console.log("get data again called")
         newRef = firebase.database().ref(`/${this.props.packSelected}`);
         let reviewItem;
         newRef.on("value", (snapshot) => {
+            console.log(snapshot)
             snapshot.forEach((i) => {
+                console.log(i.val())
                 reviewItem = {
                     key: i.key,
                     value: i.val(),
@@ -45,13 +53,17 @@ class Review extends Component {
                 console.log(reviewPack)
             });
 
-        }); 
-        
+        });
+
     }
 
     displayDeck = () => {
+
+        reviewPack = []; 
+        duplicatePack = [];
         
-        this.componentDidMount();
+        this.getDataAgain();
+
         this.setState({
             reviewPack: reviewPack,
             display: false,
@@ -109,7 +121,6 @@ class Review extends Component {
     }
 
     delete = () => {
-
         const deleteRef = newRef.child(randomCard.key);
         deleteRef.set({}).then(() => {
             const index = reviewPack.indexOf(randomCard)
@@ -135,7 +146,7 @@ class Review extends Component {
                             </div>
                             <div className="buttonText">
                                 Review deck again
-                                </div>
+                            </div>
                         </button>
 
                         <button onClick={(e) => { this.props.homePage(); this.homePage() }}>

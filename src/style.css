@@ -140,8 +140,14 @@ h1 {
   font-size: 3rem;
   margin: 0; }
 
+h2 {
+  font-size: 1.8rem; }
+
+h3 {
+  font-size: 1.6rem; }
+
 p {
-  font-size: 2rem; }
+  font-size: 1.5rem; }
 
 svg {
   margin: 0 15px;
@@ -154,6 +160,135 @@ svg {
   width: 80%;
   max-width: 600px;
   margin: 0 auto; }
+
+a {
+  text-decoration: none;
+  color: inherit; }
+
+ul {
+  list-style-type: none;
+  padding-left: 0; }
+
+h3 {
+  margin-bottom: 5px; }
+
+li {
+  text-align: left;
+  padding: 5px 15px;
+  margin-bottom: 5px;
+  background-color: white;
+  border-radius: 9px;
+  box-shadow: gainsboro 0px 0px 10px 0px;
+  position: relative; }
+
+li p {
+  margin-top: 0; }
+
+li button {
+  background-color: transparent;
+  position: absolute;
+  top: -10px;
+  right: -6px; }
+
+li button svg {
+  width: 15px;
+  height: 15px;
+  fill: #2d3848;
+  transition: all 0.3s; }
+  li button svg:hover {
+    fill: #1b9ce2; }
+
+.editCard {
+  right: 20px; }
+
+.addTitleForm {
+  background-color: #2d3848;
+  width: 100%;
+  border-radius: 9px;
+  padding: 10px;
+  box-shadow: grey 0px 0px 10px 0px; }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset; }
+
+.packTitle,
+.submitPackTitle {
+  width: calc(50% - 10px);
+  margin: 5px;
+  padding: 10px;
+  border: 0;
+  border-radius: 5px; }
+
+.submitPackTitle {
+  background-color: lightslategrey;
+  color: white;
+  transition: all 0.3s; }
+  .submitPackTitle:hover {
+    background-color: #1b9ce2; }
+
+.addCardForm {
+  background-color: lightslategrey;
+  border-radius: 9px;
+  padding: 10px;
+  box-shadow: grey 0px 0px 10px 0px; }
+
+.addCardQuestion,
+.addCardAnswer {
+  width: 80%;
+  float: left;
+  clear: both;
+  padding: 10px;
+  margin: 5px;
+  border: 0;
+  border-radius: 5px; }
+
+.addCardSubmit {
+  width: 35px;
+  height: 35px;
+  float: right;
+  background-color: #eceff1;
+  color: #2d3848;
+  border: 0;
+  border-radius: 50%;
+  font-size: 2rem;
+  line-height: 0.9;
+  margin-top: -16px;
+  margin-right: 2%;
+  transition: all 0.3s; }
+  .addCardSubmit:hover {
+    background-color: #2d3848;
+    color: white; }
+
+.formEdit {
+  padding: 10px;
+  padding-left: 0; }
+
+.formEdit input {
+  padding: 2.9px;
+  margin: 1px;
+  width: 80%;
+  position: relative; }
+
+.formEdit svg {
+  fill: #2d3848;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 42px;
+  right: 12px; }
+
+.createPack {
+  width: 100%;
+  border-radius: 9px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: grey 0px 0px 10px 0px;
+  transition: all 0.3s; }
+  .createPack:hover {
+    background-color: #2d3848; }
 
 .footer {
   position: absolute;
@@ -197,6 +332,9 @@ svg {
   align-items: space-around;
   flex-grow: 1; }
 
+.cardNumber {
+  color: grey; }
+
 .buttonHolder {
   width: 100%;
   display: flex;
@@ -219,6 +357,31 @@ button {
 button.rightAlign {
   justify-content: flex-end; }
 
+.landingPageButton {
+  background-color: white;
+  border-radius: 9px;
+  color: #2d3848;
+  font-size: 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 50px; }
+  .landingPageButton:hover {
+    box-shadow: grey 0px 0px 10px 0px; }
+
+.reviewLink {
+  width: 100%; }
+
+.reviewButton {
+  display: block;
+  width: 100%;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+  background-color: lightslategrey; }
+  .reviewButton:hover {
+    background-color: #1b9ce2; }
+
 .barContainer {
   margin: 0 auto;
   margin-top: 50px;
@@ -237,7 +400,7 @@ button.rightAlign {
 .packDisplay {
   width: 100%;
   margin: 20px auto;
-  height: 150px;
+  height: 200px;
   border-radius: 9px;
   background-color: white;
   box-shadow: silver 0px 0px 5px 0px;
@@ -252,14 +415,21 @@ button.rightAlign {
     background-color: #2d3848;
     color: white; }
 
-.addPack svg {
-  margin-bottom: 25px; }
-
 .addPack {
   display: flex;
-  background-color: lightslategrey;
+  justify-content: center;
+  background-color: #2d3848;
+  box-shadow: silver 0px 0px 20px 0px;
+  border-radius: 9px;
   flex-direction: column;
-  color: white; }
+  color: white;
+  padding: 10px;
+  transition: all 0.3s; }
+  .addPack:hover {
+    background-color: #1b9ce2; }
+
+.addPack svg {
+  margin: 0 auto; }
 
 .packFooter {
   background-color: #2d3848;
@@ -292,7 +462,7 @@ button.rightAlign {
 button.startDeck {
   margin: 0 auto;
   border-radius: 5px;
-  padding: 0;
+  padding: 20px;
   background-color: #1b9ce2;
   flex-grow: 0;
   flex-basis: 50px;
@@ -315,14 +485,8 @@ header {
   background-color: lightslategrey;
   margin-bottom: 50px; }
 
-header button {
-  background-color: lightslategrey;
-  flex-grow: 0; }
-  header button:hover > svg {
-    fill: #2d3848; }
-
-header button svg {
-  transition: all 0.3s; }
+header svg:hover {
+  fill: #2d3848; }
 
 header .wrapper {
   display: flex;
@@ -358,6 +522,7 @@ h1 {
 .buttonIcon {
   background-color: white;
   position: absolute;
+  left: 0;
   height: 100%;
   width: 50px;
   border: solid 4px lightslategrey;
